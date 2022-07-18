@@ -6,22 +6,22 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 00:07:36 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/19 02:36:19 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/19 04:38:56 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static char	*get_executable(const char **paths, const char *cmd_name);
-static char	*connect_path_and_cmd(const char *dir, const char *cmd);
+static char	*get_executable(char **paths, char *cmd_name);
+static char	*connect_path_and_cmd(char *dir, char *cmd);
 
-char	*find_cmd_fullpath(const char *pathenv, const char *cmd_name)
+char	*find_cmd_fullpath(char *pathenv, char *cmd_name)
 {
-	char	**paths;
-	char	*path;
+	char		**paths;
+	char		*path;
 
 	if (cmd_name[0] == ' ' || cmd_name[0] == '\0')
-		exit_cmd_not_found(cmd_name);
+		exit_command_not_found(cmd_name);
 	paths = wrapper_split(pathenv, ':');
 	path = get_executable(paths, cmd_name);
 	free(cmd_name);
@@ -29,7 +29,7 @@ char	*find_cmd_fullpath(const char *pathenv, const char *cmd_name)
 	return (path);
 }
 
-static char	*get_executable(const char **paths, const char *cmd_name)
+static char	*get_executable(char **paths, char *cmd_name)
 {
 	char	*path;
 	char	*res;
@@ -39,7 +39,7 @@ static char	*get_executable(const char **paths, const char *cmd_name)
 	i = 0;
 	while (paths[i] != NULL)
 	{
-		path = join_path_and_cmd(paths[i], cmd_name);
+		path = connect_path_and_cmd(paths[i], cmd_name);
 		if (access(path, X_OK) == 0)
 			return (path);
 		if (res == NULL && access(path, F_OK) == 0)
@@ -53,7 +53,7 @@ static char	*get_executable(const char **paths, const char *cmd_name)
 	return (res);
 }
 
-static char	*connect_path_and_cmd(const char *dir, const char *cmd)
+static char	*connect_path_and_cmd(char *dir, char *cmd)
 {
 	char	*path;
 

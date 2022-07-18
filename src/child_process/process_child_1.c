@@ -6,13 +6,13 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 02:35:04 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/19 01:46:26 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/19 04:26:27 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "child_process.h"
 
-void	process_child_1(char **argv, int pipefd[2])
+void	process_child_1(const char **argv, int pipefd[2])
 {
 	char		*path;
 	const char	*infile_name;

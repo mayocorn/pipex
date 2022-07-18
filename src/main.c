@@ -6,11 +6,13 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 23:55:55 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/17 06:11:36 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/19 04:26:00 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static int	pipex(const char **argv);
 
 int	main(int argc, const char **argv)
 {
@@ -22,7 +24,7 @@ int	main(int argc, const char **argv)
 	return (pipex(argv));
 }
 
-static int	pipex(char **argv)
+static int	pipex(const char **argv)
 {
 	int		pipefd[2];
 	pid_t	pid;
