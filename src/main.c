@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 23:55:55 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/17 04:40:13 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/17 06:11:36 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	pipex(char **argv)
 {
 	int		pipefd[2];
 	pid_t	pid;
-	int		status;
 	pid_t	last_pid;
+	int		status;
 	int		last_status;
 
 	wrapper_pipe(pipefd);
