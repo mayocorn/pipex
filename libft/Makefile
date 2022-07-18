@@ -6,7 +6,7 @@
 #    By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 15:22:22 by stsunoda          #+#    #+#              #
-#    Updated: 2022/07/19 03:46:22 by mayocorn         ###   ########.fr        #
+#    Updated: 2022/07/19 04:48:48 by mayocorn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFLAG = -Wall -Wextra -Werror
 
 $(OBJDIR)%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAG) -MMD -MP -c $< -o $@
+	$(CC) $(CFLAG) -I../include/ -MMD -MP -c $< -o $@
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $(OBJS)
