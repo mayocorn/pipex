@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 01:20:59 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/19 02:35:06 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/19 02:50:28 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "libft.h"
 # include "wrapper.h"
 
-void	print_usage(char *prg);
+void	print_usage(void);
 void	exit_perror(const char *message);
 void	exit_command_not_found(char *cmd_name);
 char	*search_path(const char *cmd);
