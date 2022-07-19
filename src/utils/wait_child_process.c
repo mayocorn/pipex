@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   wait_child_process.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 03:36:05 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/20 05:06:45 by mayocorn         ###   ########.fr       */
+/*   Created: 2022/07/20 04:58:33 by mayocorn          #+#    #+#             */
+/*   Updated: 2022/07/20 05:13:47 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "utils.h"
 
-int	pipex(const char **argv)
+int	wait_child_process(pid_t last_pid)
 {
-	int		pipefd[2];
 	pid_t	pid;
+	int		status;
+	int		last_status;
 
-	wrapper_pipe(pipefd);
-	pid = wrapper_fork();
-	if (pid == 0)
-		process_child_1(argv, pipefd);
-	close(pipefd[1]);
-	pid = wrapper_fork();
-	if (pid == 0)
-		process_child_2(argv, pipefd);
-	close(pipefd[0]);
-	return(wait_child_process(pid));
+	last_status = 0;
+	pid = wait(&status);
+	while (pid != -1)
+	{
+		if (pid == last_pid)
+			last_status = status;
+		pid = wait(&status);
+	}
+	if (WIFEXITED(last_status) == 0)
+		return (EXIT_FAILURE);
+	return (WEXITSTATUS(last_status));
 }
