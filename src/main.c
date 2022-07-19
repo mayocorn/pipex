@@ -6,49 +6,15 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 23:55:55 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/19 04:26:00 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/20 03:37:02 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	pipex(const char **argv);
-
 int	main(int argc, const char **argv)
 {
 	if (argc != 5)
-	{
-		print_usage();
-		exit(EXIT_FAILURE);
-	}
+		exit_print_usage();
 	return (pipex(argv));
-}
-
-static int	pipex(const char **argv)
-{
-	int		pipefd[2];
-	pid_t	pid;
-	pid_t	last_pid;
-	int		status;
-	int		last_status;
-
-	wrapper_pipe(pipefd);
-	pid = wrapper_fork();
-	if (pid == 0)
-		process_child_1(argv, pipefd);
-	close(pipefd[1]);
-	pid = wrapper_fork();
-	if (pid == 0)
-		process_child_2(argv, pipefd);
-	close(pipefd[0]);
-	last_pid = pid;
-	last_status = EXIT_FAILURE;
-	pid = wait(&status);
-	while (pid != -1)
-	{
-		if (pid == last_pid)
-			last_status = status;
-		pid = wait(&status);
-	}
-	return (WIFEXITED(last_status) && WEXITSTATUS(last_status));
 }
