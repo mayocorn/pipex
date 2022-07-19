@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 03:36:05 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/20 05:06:45 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/20 05:52:30 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	pipex(const char **argv)
 	wrapper_pipe(pipefd);
 	pid = wrapper_fork();
 	if (pid == 0)
-		process_child_1(argv, pipefd);
+		process_first_child(argv + 1, pipefd);
 	close(pipefd[1]);
 	pid = wrapper_fork();
 	if (pid == 0)
-		process_child_2(argv, pipefd);
+		process_last_child(argv + 3, pipefd);
 	close(pipefd[0]);
 	return(wait_child_process(pid));
 }
