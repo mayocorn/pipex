@@ -6,17 +6,17 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 03:37:47 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/20 05:34:33 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/20 07:48:24 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 static void		create_first_child(const char **argv, int next_pipe[2]);
-static void		create_middle_child(const char *cmds, int pre_pipe[2], int next_pipe[2]);
+static void		create_middle_child(const char *cmd, int pre_pipe[2], int next_pipe[2]);
 static pid_t	create_last_child(const char **argv, int pre_pipe[2]);
 
-static int	pipex_bonus(const int argc, const char **argv)
+int	pipex_bonus(const int argc, const char **argv)
 {
 	int		pre_pipe[2];
 	int		next_pipe[2];
@@ -48,20 +48,20 @@ static void	create_first_child(const char **argv, int next_pipe[2])
 	pid_t	pid;
 
 	wrapper_pipe(next_pipe);
-	pid = wrapeer_fork();
+	pid = wrapper_fork();
 	if (pid == 0)
 		process_first_child(argv, next_pipe);
 	close(next_pipe[1]);
 }
 
-static void	create_middle_child(const char *cmds, int pre_pipe[2], int next_pipe[2])
+static void	create_middle_child(const char *cmd, int pre_pipe[2], int next_pipe[2])
 {
 	pid_t	pid;
 
 	wrapper_pipe(next_pipe);
-	pid = wrapeer_fork();
+	pid = wrapper_fork();
 	if (pid == 0)
-		process_middle_child(cmds, pre_pipe, next_pipe);
+		process_middle_child(cmd, pre_pipe, next_pipe);
 	close(pre_pipe[0]);
 	close(next_pipe[1]);
 }
