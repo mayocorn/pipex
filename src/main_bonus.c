@@ -1,27 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/20 00:39:53 by mayocorn          #+#    #+#             */
+/*   Updated: 2022/07/20 07:47:51 by mayocorn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, const char **argv)
 {
-	if (argc < 5)
-		exit_print_usage();
-	return (pipex(argv));
-}
-
-static int	pipex()
-{
-	int		pre_pipefd[2];
-	int		pipefd[2];
-	size_t	cmd_cnt;
-	size_t	i;
-
-	cmd_cnt = get_cmd_cnt();
-	i = 0;
-	while (i < cmd_cnt)
-	{
-		if (i == 0)
-
-		else if (i == cmd_cnt - 1)
-		else
-	}
+	if (argc >= 2 && ft_strncmp(argv[1], "here_doc", 8) == 0)
+		return (pipex_heredoc(argc, argv));
+	else
+		return (pipex_bonus(argc, argv));
 }
