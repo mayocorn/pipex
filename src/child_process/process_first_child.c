@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_fist_child.c                               :+:      :+:    :+:   */
+/*   process_first_child.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 02:35:04 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/20 06:14:15 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/21 08:31:50 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "child_process.h"
 
-void	process_first_child(const char **argv, int pipefd[2])
+void	process_first_child(const char *cmd, const char *infile, \
+								int next_pipe[2])
 {
-	const char	*infile_name;
-	const char	*cmd;
-	char		*path;
-	int			infile_fd;
+	char	*path;
+	int		fd;
 
-	close(pipefd[0]);
-	wrapper_dup2(pipefd[1], STDOUT_FILENO);
-	close(pipefd[1]);
-	infile_name = argv[0];
-	cmd = argv[1];
+	close(next_pipe[0]);
+	wrapper_dup2(next_pipe[1], STDOUT_FILENO);
+	close(next_pipe[1]);
 	path = search_path(cmd);
-	infile_fd = wrapper_open(infile_name, O_RDONLY);
-	wrapper_dup2(infile_fd, STDIN_FILENO);
-	close(infile_fd);
+	fd = wrapper_open(infile, O_RDONLY);
+	wrapper_dup2(fd, STDIN_FILENO);
+	close(fd);
 	wrapper_execve(path, cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 01:56:34 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/21 06:38:30 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/21 08:37:42 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@
 # include "utils.h"
 # include "wrapper.h"
 
-void	process_first_child(const char **argv, int pipefd[2]);
-void	process_last_child(const char **argv, int pre_fd[2], int oflag);
+void	process_first_child(const char *cmd, const char *infile, \
+								int next_pipe[2]);
+void	process_fist_child_heredoc(const char *cmd, char *limiter, \
+								int next_pipe[2]);
 void	process_middle_child(const char *cmd, \
 								int pre_pipe[2], int next_pipe[2]);
+void	process_last_child(const char *cmd, const char *outfile, \
+								int oflag, int pre_pipe[2]);
 
 #endif

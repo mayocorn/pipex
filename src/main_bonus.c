@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 00:39:53 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/21 06:33:24 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/21 08:50:52 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void		create_first_child(const char **argv, \
 									int pre_pipe[2], int next_pipe[2]);
 static void		create_middle_child(const char *cmd, \
 									int pre_pipe[2], int next_pipe[2]);
-static pid_t	create_last_child(const int argc, \
-									const char **argv, int pre_pipe[2]);
+static pid_t	create_last_child(const int argc, const char **argv, \
+									int pre_pipe[2]);
 
 int	main(const int argc, const char **argv)
 {
@@ -57,7 +57,12 @@ static void	create_first_child(const char **argv, \
 	wrapper_pipe(next_pipe);
 	pid = wrapper_fork();
 	if (pid == 0)
-		process_first_child(argv + 1, next_pipe);
+	{
+		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+			process_first_child_heredoc(argv[3], argv[2], next_pipe);
+		else
+			process_first_child(argv[2], argv[1], next_pipe);
+	}
 	close(next_pipe[1]);
 	swap_pipe(pre_pipe, next_pipe);
 }
@@ -79,16 +84,16 @@ static void	create_middle_child(const char *cmd, \
 static pid_t	create_last_child(const int argc, \
 									const char **argv, int pre_pipe[2])
 {
+	int		oflag;
 	pid_t	pid;
 
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		oflag = O_WRONLY | O_CREAT | O_APPEND;
+	else
+		oflag = O_WRONLY | O_CREAT | O_TRUNC;
 	pid = wrapper_fork();
 	if (pid == 0)
-	{
-		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-			process_last_child(argv + argc - 2, pre_pipe, O_WRONLY | O_CREAT | O_APPEND);
-		else
-			process_last_child(argv + argc - 2, pre_pipe, O_WRONLY | O_CREAT | O_TRUNC);
-	}
+		process_last_child(argv[argc - 2], argv[argc - 1], oflag, pre_pipe);
 	close(pre_pipe[0]);
 	return (pid);
 }
