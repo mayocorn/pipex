@@ -6,12 +6,13 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 23:29:33 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/19 04:42:50 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/21 06:37:47 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRAPPER_H
 # define WRAPPER_H
+
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -30,4 +31,5 @@ char	**wrapper_split(const char *s, char c);
 void	free_split(char **buf);
 char	*wrapper_strdup(const char *s);
 char	*wrapper_strjoin(char const *s1, char const *s2);
+
 #endif

@@ -6,12 +6,13 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 01:20:59 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/20 06:46:42 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/21 06:37:37 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
+
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <stdio.h>
@@ -30,4 +31,5 @@ void	swap_pipe(int pre_pipe[2], int next_pipe[2]);
 char	*find_cmd_fullpath(char *pathenv, char *cmd_name);
 void	swap_pipe(int pre_pipe[2], int next_pipe[2]);
 int		wait_child_process(pid_t last_pid);
+
 #endif
