@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 00:39:53 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/21 08:50:52 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 08:36:46 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ static int	pipex(const int argc, const char **argv)
 	int		pre_pipe[2];
 	int		next_pipe[2];
 	pid_t	pid;
-	size_t	i;
+	int		i;
 
 	create_first_child(argv, pre_pipe, next_pipe);
 	i = 3;
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	{
 		i++;
+		wait(NULL);
+	}
 	while (i < argc - 2)
 	{
 		create_middle_child(argv[i], pre_pipe, next_pipe);
