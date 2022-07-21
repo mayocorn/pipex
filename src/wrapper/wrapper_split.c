@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:12 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/19 04:42:59 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 07:29:18 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**wrapper_split(const char *s, char c)
 
 	res = ft_split(s, c);
 	if (res == NULL)
-		exit_perror("pipex");
+		exit(EXIT_FAILURE);
 	return (res);
 }
 
