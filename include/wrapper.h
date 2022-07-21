@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 23:29:33 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 04:41:24 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:57:17 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "libft.h"
 # include "utils.h"
 
-int		wrapper_dup(int oldfd);
 int		wrapper_dup2(int oldfd, int newfd);
 void	wrapper_execve(const char *path, const char *args);
 pid_t	wrapper_fork(void);
