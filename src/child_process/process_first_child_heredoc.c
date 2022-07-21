@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:11:29 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 05:00:13 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 08:46:33 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static int	create_tmp_infile(const char *limiter);
 static void	read_heredoc(int fd, const char *limiter);
+static void	exit_unlink(void);
 
-void	process_fist_child_heredoc(const char *cmd, const char *limiter, \
+void	process_first_child_heredoc(const char *cmd, const char *limiter, \
 									int next_pipe[2])
 {
 	char	*path;
@@ -58,7 +59,7 @@ static void	read_heredoc(int fd, const char *limiter)
 	size_t	len;
 
 	len = ft_strlen(limiter);
-	str = get_next_line(fd);
+	str = get_next_line(STDIN_FILENO);
 	while (str != NULL)
 	{
 		if (ft_strlen(str) == len + 1 && ft_strncmp(str, limiter, len) == 0)
@@ -68,7 +69,7 @@ static void	read_heredoc(int fd, const char *limiter)
 		}
 		ft_putstr_fd(str, fd);
 		free(str);
-		str = get_next_line(fd);
+		str = get_next_line(STDIN_FILENO);
 	}
 }
 
