@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 23:29:33 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 04:57:17 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 05:05:37 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ pid_t	wrapper_fork(void);
 int		wrapper_open(const char *path, int oflag);
 int		wrapper_open_mode(const char *path, int oflag, mode_t mode);
 void	wrapper_pipe(int pipefd[2]);
-void	wrapper_putstr_fd(char *s, int fd);
 char	**wrapper_split(const char *s, char c);
 void	free_split(char **buf);
 char	*wrapper_strdup(const char *s);

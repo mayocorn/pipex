@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:11:29 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 04:54:18 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 05:00:13 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	read_heredoc(int fd, const char *limiter)
 			free(str);
 			return ;
 		}
-		wrapper_putstr_fd(str, fd);
+		ft_putstr_fd(str, fd);
 		free(str);
 		str = get_next_line(fd);
 	}
