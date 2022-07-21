@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 23:29:33 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/21 06:37:47 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:41:24 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 # include "libft.h"
 # include "utils.h"
 
+int		wrapper_dup(int oldfd);
 int		wrapper_dup2(int oldfd, int newfd);
 void	wrapper_execve(const char *path, const char *args);
 pid_t	wrapper_fork(void);
 int		wrapper_open(const char *path, int oflag);
 int		wrapper_open_mode(const char *path, int oflag, mode_t mode);
 void	wrapper_pipe(int pipefd[2]);
+void	wrapper_putstr_fd(char *s, int fd);
 char	**wrapper_split(const char *s, char c);
 void	free_split(char **buf);
 char	*wrapper_strdup(const char *s);
