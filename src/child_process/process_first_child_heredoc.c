@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 09:11:29 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 04:31:32 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:54:18 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ static int	create_tmp_infile(const char *limiter)
 
 	tmp_fd = wrapper_open_mode(TMP_FILE, \
 								O_RDWR | O_CREAT | O_EXCL | O_CLOEXEC, 0600);
-	write_fd = wrapper_dup(tmp_fd);
+	write_fd = dup(tmp_fd);
+	if (write_fd == -1)
+		exit_unlink();
 	read_heredoc(write_fd, limiter);
 	close(write_fd);
-	read_fd = wrapper_open(TMP_FILE, O_RDONLY);
+	read_fd = open(TMP_FILE, O_RDONLY);
+	if (read_fd == -1)
+		exit_unlink();
 	close(tmp_fd);
 	unlink(TMP_FILE);
 	return (read_fd);
@@ -66,4 +70,10 @@ static void	read_heredoc(int fd, const char *limiter)
 		free(str);
 		str = get_next_line(fd);
 	}
+}
+
+static void	exit_unlink(void)
+{
+	unlink(TMP_FILE);
+	exit_perror("pipex");
 }
