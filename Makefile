@@ -6,7 +6,7 @@
 #    By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 13:59:07 by mayocorn          #+#    #+#              #
-#    Updated: 2022/07/22 07:16:19 by mayocorn         ###   ########.fr        #
+#    Updated: 2022/07/24 03:16:23 by mayocorn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,11 @@ BSRCS   = main_bonus.c \
           get_next_line/get_next_line_utils.c \
           utils/find_cmd_fullpath.c \
           utils/ft_exit.c \
+		  utils/read_heredoc.c \
           utils/search_path.c \
           utils/swap_pipe.c \
           utils/wait_child_process.c \
+          wrapper/wrapper_calloc.c \
           wrapper/wrapper_dup2.c \
           wrapper/wrapper_execve.c \
           wrapper/wrapper_fork.c \
