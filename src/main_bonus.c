@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 00:39:53 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 08:36:46 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/24 02:28:48 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ static int	pipex(const int argc, const char **argv)
 	create_first_child(argv, pre_pipe, next_pipe);
 	i = 3;
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-	{
 		i++;
-		wait(NULL);
-	}
 	while (i < argc - 2)
 	{
 		create_middle_child(argv[i], pre_pipe, next_pipe);
@@ -55,17 +52,20 @@ static int	pipex(const int argc, const char **argv)
 static void	create_first_child(const char **argv, \
 									int pre_pipe[2], int next_pipe[2])
 {
+	char	*heredoc;
 	pid_t	pid;
 
 	wrapper_pipe(next_pipe);
+	heredoc = read_heredoc(argv);
 	pid = wrapper_fork();
 	if (pid == 0)
 	{
-		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-			process_first_child_heredoc(argv[3], argv[2], next_pipe);
+		if (heredoc != NULL)
+			process_first_child_heredoc(argv[3], heredoc, next_pipe);
 		else
 			process_first_child(argv[2], argv[1], next_pipe);
 	}
+	free(heredoc);
 	close(next_pipe[1]);
 	swap_pipe(pre_pipe, next_pipe);
 }

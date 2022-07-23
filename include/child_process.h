@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 01:56:34 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 05:33:45 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/24 02:19:08 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 void	process_first_child(const char *cmd, const char *infile, \
 								int next_pipe[2]);
-void	process_first_child_heredoc(const char *cmd, const char *limiter, \
+void	process_first_child_heredoc(const char *cmd, char *heredoc, \
 								int next_pipe[2]);
 void	process_middle_child(const char *cmd, \
 								int pre_pipe[2], int next_pipe[2]);
