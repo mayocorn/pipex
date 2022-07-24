@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 00:39:53 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/24 02:28:48 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/24 13:37:22 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static pid_t	create_last_child(const int argc, const char **argv, \
 
 int	main(const int argc, const char **argv)
 {
-	if (argc >= 2 && ft_strncmp(argv[1], "here_doc", 8) == 0 && argc < 6)
+	if (argc >= 2 && ft_strcmp(argv[1], "here_doc") == 0 && argc < 6)
 		exit_print_usage_heredoc();
 	if (argc < 5)
 		exit_print_usage_bonus();
@@ -38,7 +38,7 @@ static int	pipex(const int argc, const char **argv)
 
 	create_first_child(argv, pre_pipe, next_pipe);
 	i = 3;
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (ft_strcmp(argv[1], "here_doc") == 0)
 		i++;
 	while (i < argc - 2)
 	{
@@ -60,10 +60,10 @@ static void	create_first_child(const char **argv, \
 	pid = wrapper_fork();
 	if (pid == 0)
 	{
-		if (heredoc != NULL)
-			process_first_child_heredoc(argv[3], heredoc, next_pipe);
-		else
+		if (heredoc == NULL)
 			process_first_child(argv[2], argv[1], next_pipe);
+		else
+			process_first_child_heredoc(argv[3], heredoc, next_pipe);
 	}
 	free(heredoc);
 	close(next_pipe[1]);
@@ -90,7 +90,7 @@ static pid_t	create_last_child(const int argc, \
 	int		oflag;
 	pid_t	pid;
 
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (ft_strcmp(argv[1], "here_doc") == 0)
 		oflag = O_WRONLY | O_CREAT | O_APPEND;
 	else
 		oflag = O_WRONLY | O_CREAT | O_TRUNC;
