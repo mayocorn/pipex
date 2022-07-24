@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 01:58:25 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 07:37:15 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/24 12:49:49 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ static char	*get_cmdname(const char *cmd)
 static char	*get_pathenv(void)
 {
 	extern char	**environ;
+	size_t		i;
 
-	while (*environ != NULL)
+	i = 0;
+	while (environ[i] != NULL)
 	{
-		if (ft_strncmp("PATH=", *environ, 5) == 0 && ft_strlen(*environ) > 5)
-			return (*environ + 5);
-		environ++;
+		if (ft_strncmp("PATH=", environ[i], 5) == 0 && ft_strlen(environ[i]) > 5)
+			return (environ[i] + 5);
+		i++;
 	}
 	return (NULL);
 }
