@@ -6,15 +6,14 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 02:35:04 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/22 08:46:29 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/24 03:19:21 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "child_process.h"
 
-void	process_first_child(const char *cmd, \
-							const char *infile, \
-							int next_pipe[2])
+void	process_first_child(const char *cmd, const char *infile, \
+								int next_pipe[2])
 {
 	char	*path;
 	int		fd;
