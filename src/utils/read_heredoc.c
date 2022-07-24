@@ -6,7 +6,7 @@
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 01:36:47 by mayocorn          #+#    #+#             */
-/*   Updated: 2022/07/24 13:34:45 by mayocorn         ###   ########.fr       */
+/*   Updated: 2022/07/24 14:59:49 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static char	*create_heredoc_str(const char *limiter)
 	char	*str;
 
 	limiter_len = ft_strlen(limiter);
+	res = (char *)ft_calloc(1, sizeof(char));
 	str = get_next_line(STDIN_FILENO);
 	while (str != NULL)
 	{
