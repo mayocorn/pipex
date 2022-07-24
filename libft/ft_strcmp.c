@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mayocorn <twitter@mayocornsuki>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 19:07:30 by stsunoda          #+#    #+#             */
-/*   Updated: 2022/07/20 00:32:29 by mayocorn         ###   ########.fr       */
+/*   Created: 2022/07/24 13:11:06 by mayocorn          #+#    #+#             */
+/*   Updated: 2022/07/24 13:14:12 by mayocorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	long	res;
-	int		neg;
-
-	res = 0;
-	neg = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v' || \
-			*str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-')
-		neg ^= 1;
-	if (*str == '+' || *str == '-')
-		str++;
-	while ('0' <= *str && *str <= '9')
-		res = res * 10 - (*str++ - '0');
-	if (!neg)
-		res = -res;
-	return ((int)res);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
